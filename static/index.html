@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload</title>
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      .image-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .uploaded-image {
+        width: 20%; /* Each image takes up 20% of the viewport width */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover; /* Ensure the image covers the area */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Upload Images</h1>
+    <form
+      hx-post="/upload"
+      hx-encoding="multipart/form-data"
+      hx-target="#response"
+      hx-swap="innerHTML"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="images" accept="image/*" multiple required />
+      <button type="submit">Upload</button>
+    </form>
+
+    <div id="response"></div>
+
+    <div class="image-container" id="uploaded-images">
+      <!-- Uploaded images will be displayed here -->
+    </div>
+  </body>
+</html>
